@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Question Game</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body style="background-color: black;">
-    <div id="box" style="display: flex; flex-wrap: wrap;"></div>
-    <div id="buttons" style="display: flex; position: fixed; bottom: 0; margin: 10px; width: 100%; justify-content: center;">
-        <button id="add-btn" style="padding: 10px; margin-right: 10px;">Add</button>
-        <button id="remove-btn" style="padding: 10px; margin-right: 10px;">Remove</button>
-        <button id="reset-btn">Reset</button>
+<body>
+    <div id="heading" class="heading">Answer 10 questions to win the game</div>
+    <div class="matquestion">
+        <div id="lhs" class="box big-box text">55</div>
+        <div id="operation" class="box small-box text">+</div>
+        <div id="rhs" class="box big-box text">10</div>
+        <div class="text">=</div>
+        <input type="number" id="client-input" class="input box">
     </div>
-    <script src="/app.js"></script>
+    <div class="matquestion">
+        <button class="btn box" id="btn">Check & Go to next question</button>
+    </div>
+    <div id="question-box" class="matquestion"></div>
+
+<script src="/script.js"></script>
 </body>
 </html>
