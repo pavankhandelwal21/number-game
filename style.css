@@ -20,6 +20,7 @@ body{
     align-items: center;
     justify-content: center;
     margin: 5%;
+    flex-wrap: wrap;
 }
 .box{
     border: 1px solid salmon;
@@ -67,10 +68,15 @@ body{
     width: 90px;
     border: 1px solid white;
     margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
 }
 .color-box.green{
-    background-color: #00ff00;
+    background-color: rgb(0, 255, 0);
 }
 .color-box.red{
-    background-color: red;
+    background-color: rgb(255, 0, 0);
 }

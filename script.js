@@ -9,7 +9,7 @@ const questionBox = document.getElementById("question-box");
 let operationlist = ["+", "-", "/", "x"];
 let countList = [];
 let count = 0;
-let totalQuestion = 3;
+let totalQuestion = 15;
 let score = 0
 
 function randomNumber(){
@@ -79,7 +79,7 @@ function generateQuestion(){
 function boxForQuestion(){
     heading.innerHTML = `Answer ${totalQuestion} questions to win the game`;
     for (let j=0; j<totalQuestion; j++){
-        questionBox.innerHTML += `<p class="color-box color-${j}"></p>`;
+        questionBox.innerHTML += `<p class="color-box color-${j}">Q${j+1}</p>`;
     }
 }
 
