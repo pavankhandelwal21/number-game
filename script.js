@@ -2,9 +2,10 @@ const lhs = document.getElementById("lhs");
 const operation = document.getElementById("operation");
 const rhs = document.getElementById("rhs");
 const clientInput = document.getElementById("client-input");
-const btn = document.getElementById("btn");
+const nextBtn = document.getElementById("next-btn");
 const heading = document.getElementById("heading");
 const questionBox = document.getElementById("question-box");
+const resetBtn = document.getElementById("reset-btn");
 
 let operationlist = ["+", "-", "/", "x"];
 let countList = [];
@@ -45,7 +46,7 @@ function verifyAnswer(systemGeneratedAns, clientvalue){
     colorVerifiedAns(countList, count)
     // console.log("verfiy", countList)
 }
-function runTillNcount(totalQuestion, count){
+function finalRun(totalQuestion, count){
     // console.log(count);
     if (Number(totalQuestion) == Number(count)){
         calculatescore(countList, count);
@@ -76,18 +77,18 @@ function generateQuestion(){
     rhs.innerHTML = systemRHS;
     systemGeneratedAns();
 }
-function boxForQuestion(){
-    heading.innerHTML = `Answer ${totalQuestion} questions to win the game`;
+function headingNQuestionBox(){
+    heading.innerHTML = `Answer ${totalQuestion} questions to win the game `;
     for (let j=0; j<totalQuestion; j++){
         questionBox.innerHTML += `<p class="color-box color-${j}">Q${j+1}</p>`;
     }
 }
 
-boxForQuestion();
+headingNQuestionBox();
 generateQuestion();
-console.log(systemGeneratedAns());
+console.log(systemLHS, systemOperation, systemRHS, "=", systemGeneratedAns());
 
-btn.addEventListener("click", () => {
+nextBtn.addEventListener("click", () => {
     clientvalue = clientInput.value;
     if (!clientvalue){
         alert("Enter answer!");
@@ -96,9 +97,16 @@ btn.addEventListener("click", () => {
         verifyAnswer(systemGeneratedAns(), clientvalue);
         clientInput.value = "";
         count++;
-        runTillNcount(totalQuestion, count);
+        finalRun(totalQuestion, count);
         generateQuestion();
-        console.log(systemGeneratedAns());
+        console.log(systemLHS, systemOperation, systemRHS, "=", systemGeneratedAns());
     }
 })
-
+resetBtn.addEventListener("click", ()=>{
+    if(count != 0){
+        window.location.reload();
+    }
+    else{
+        alert(`No need to reset this is a new game`)
+    }
+})
