@@ -66,7 +66,7 @@ body{
     border-color: rgb(255, 149, 137);
 }
 .twobtn{
-    width: 47%;
+    width: 100px;
 }
 .btn-black{
     margin: 5px;
@@ -174,6 +174,9 @@ body{
 }
 .displaynone{
     display: none;
+}
+.reset-tag{
+    margin: auto;
 }
 
 
