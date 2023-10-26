@@ -7,12 +7,17 @@ const heading = document.getElementById("heading");
 const questionBox = document.getElementById("question-box");
 const resetBtn = document.getElementById("reset-btn");
 const closePopup = document.getElementById("close-popup");
+const startBtn = document.getElementById("start-btn");
+const restartBtn = document.getElementById("restart-btn");
+const continueBtn = document.getElementById("continue-btn");
+const questionInput = document.getElementById("question-input");
+const popuptext = document.getElementById("popuptext");
 
 let operationlist = ["+", "-", "/", "x"];
 let countList = [];
+let totalQuestion;
 let count = 0;
-let totalQuestion = 5;
-let score = 0
+let score = 0;
 
 function randomNumber(){
     return Math.floor(Math.random()*99);
@@ -59,11 +64,23 @@ function systemGeneratedAns(){
     return actionOperations(systemLHS,systemRHS, systemOperation);
 }
 function showPopup(message){
-    popuptext.innerHTML = `${message}`;
-    document.querySelector('.bg-model').classList.add('show');
+    if (message != undefined){
+        popuptext.innerHTML = `${message}`;
+        document.querySelector('.bg-model')?.classList.add('show');
+    }
+    else{
+        popuptext.innerHTML = ``;
+        document.querySelector('.bg-model').classList.add('show');
+    }
 }
 function hidePopup(){
     document.querySelector('.bg-model').classList.remove('show');
+}
+function hideCloseBtnPopup(){
+    document.querySelector('.close-popup').classList.add('hide');
+}
+function showCloseBtnPopup(){
+    document.querySelector('.close-popup').classList.remove('hide');
 }
 function generateQuestion(){
     systemLHS = randomNumber();
@@ -83,12 +100,16 @@ function headingNQuestionBox(){
         questionBox.innerHTML += `<p class="color-box color-${j}">Q${j+1}</p>`;
     }
 }
+function totalQuestionUndefined(){
+    if (totalQuestion == undefined){
+        window.location.reload();
+    }
+}
 // Generate next question or submit score
 function questionORscore(totalQuestion, count){
-    // console.log(count);
     if (Number(totalQuestion) == Number(count)){
         calculatescore(countList, count);
-        document.querySelector('.close-popup').classList.add('hide');
+        hideCloseBtnPopup()
         showPopup(`Your Score = ${score}/${totalQuestion}`)
         popup.innerHTML += `<button id="play-again" class="btn box">Play Again</button>`;
         const playAgain = document.getElementById("play-again");
@@ -101,14 +122,30 @@ function questionORscore(totalQuestion, count){
         console.log(systemLHS, systemOperation, systemRHS, "=", systemGeneratedAns());
     }
 }
+//starting of the game
+function startGamePopup(){
+    hideCloseBtnPopup();
+    showPopup(`Give count of question you want to answer`);
+}
 
-
-headingNQuestionBox();
-generateQuestion();
-console.log(systemLHS, systemOperation, systemRHS, "=", systemGeneratedAns());
-
+// Events
+startBtn.addEventListener("click", ()=>{
+    totalQuestion = questionInput.value;
+    if (totalQuestion < 2 || totalQuestion > 100 ) {
+        document.querySelector('.error-message').classList.remove('displaynone');
+    }
+    else{
+        hidePopup();
+        showCloseBtnPopup();
+        document.querySelector('.start-game').classList.add('displaynone');
+        headingNQuestionBox();
+        generateQuestion();
+        console.log(systemLHS, systemOperation, systemRHS, "=", systemGeneratedAns());
+    }
+})
 nextBtn.addEventListener("click", () => {
-    clientvalue = clientInput.value;
+    totalQuestionUndefined();
+    let clientvalue = clientInput.value;
     if (!clientvalue){
         showPopup("Enter answer!");
     }
@@ -120,8 +157,11 @@ nextBtn.addEventListener("click", () => {
     }
 })
 resetBtn.addEventListener("click", ()=>{
+    totalQuestionUndefined();
     if(count != 0){
-        window.location.reload();
+        hideCloseBtnPopup()
+        showPopup(`Do you want to restart the game?`)
+        document.querySelector('.restart-tag').classList.remove('displaynone');
     }
     else{
         showPopup(`No need to reset this is a new game`);
@@ -130,3 +170,12 @@ resetBtn.addEventListener("click", ()=>{
 closePopup.addEventListener("click", ()=>{
     hidePopup();
 })
+restartBtn.addEventListener("click", ()=>{
+    window.location.reload();
+})
+continueBtn.addEventListener("click", ()=>{
+    hidePopup();
+    showCloseBtnPopup();
+})
+
+startGamePopup()
