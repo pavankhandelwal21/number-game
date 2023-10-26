@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="heading" class="heading">Answer 10 questions to win the game</div>
+    <!-- <button id="question-btn" class="btn box heading-btn">Confirm count</button> -->
     <div class="matquestion">
         <div id="lhs" class="box big-box text">55</div>
         <div id="operation" class="box small-box text">+</div>
@@ -16,9 +17,17 @@
         <input type="number" id="client-input" class="input box">
     </div>
     <div class="matquestion">
-        <button class="btn box" id="btn">Check & Go to next question</button>
+        <button id="next-btn" class="btn box" >Check & Go to next question</button>
+        <button id="reset-btn" class="btn box">Reset</button>
     </div>
     <div id="question-box" class="matquestion"></div>
+
+    <div class="bg-model">
+        <div id="popup" class="popup" >
+            <span id="close-popup" class="close-popup">&times;</span>
+            <span id="popuptext" class="popuptext"> Hello</span>
+        </div>
+    </div>
 
 <script src="/script.js"></script>
 </body>
